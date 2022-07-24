@@ -23,7 +23,6 @@
 #include <DHT.h>
 
 #define sensor 2
-#define button 4
 #define blueLed 9
 #define greenLed 10
 #define redLed 11
@@ -38,7 +37,6 @@ float peakHumidity = 0.00;
 DHT dht(sensor, dhtType);
 
 void setup() {
-  pinMode(button, INPUT);
   pinMode(blueLed, OUTPUT);
   pinMode(greenLed, OUTPUT);
   pinMode(redLed, OUTPUT);
