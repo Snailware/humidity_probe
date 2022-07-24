@@ -16,7 +16,7 @@
 //    This script uses an Arduino UNO & DHT11 humidity sensor to monitor &    //
 //    log relative humidity. for more info, see README.md or:                 //
 //                                                                            //
-//                      https://github.com/snailware/tbd                      //
+//                https://github.com/snailware/humidity_probe                 //
 //                                                                            //
  //////////////////////////////////////////////////////////////////////////////
 
@@ -45,9 +45,9 @@ void setup() {
 
   for (int elapsedSeconds = 0; elapsedSeconds < startupDelay; elapsedSeconds++) {
     analogWrite(blueLed, 100);
-    delay(100);
+    delay(50);
     analogWrite(blueLed, 0);
-    delay(900);
+    delay(950);
   }
 
   dht.begin();
@@ -58,34 +58,18 @@ void loop() {
   if (currentHumidity > peakHumidity) {
     peakHumidity = currentHumidity;
   }
-  // if (digitalRead(button) == 1) {
-  //   if (peakHumidity > greenThreshold && peakHumidity <= yellowThreshold) {
-  //     analogWrite(greenLed, 100);
-  //   } else if (peakHumidity > yellowThreshold &&  peakHumidity <= redThreshold) {
-  //     analogWrite(greenLed, 60);
-  //     analogWrite(redLed, 110);
-  //   } else if (peakHumidity > redThreshold) {
-  //     analogWrite(redLed, 100);
-  //   }
-  // delay(3000);
-  // } else {
-  //   analogWrite(redLed, 0);
-  //   analogWrite(greenLed, 0);
-  //   analogWrite(blueLed, 0);
-  // }
-}
 
-void blinkLed(float humidity) {
-  if (humidity > greenThreshold && humidity <= yellowThreshold) {
+  if (peakHumidity > greenThreshold && peakHumidity <= yellowThreshold) {
     analogWrite(greenLed, 100);
-  } else if (humidity > yellowThreshold &&  humidity <= redThreshold) {
+  } else if (peakHumidity > yellowThreshold && peakHumidity <= redThreshold) {
     analogWrite(greenLed, 60);
     analogWrite(redLed, 110);
-  } else if (humidity > redThreshold) {
+  } else if (peakHumidity > redThreshold) {
     analogWrite(redLed, 100);
   }
   delay(50);
   analogWrite(greenLed, 0);
   analogWrite(redLed, 0);
   analogWrite(blueLed, 0);
+  delay(950);
 }
